@@ -302,7 +302,16 @@ void setup()
       delay(1000);
     }
   } while (!isPwdCorrect);
-
+    
+    cur.line = 0;
+    cur.row = 0;
+    SetCursor(lcd, cur);
+    ClearLine(1, lcd);
+    lcd.print("Preheating");
+    relay.TurnOn();
+    delay(60000)
+    relay.TurnOff();
+  
   cur.row = 0;
   cur.line = 0;
   SetCursor(lcd, cur);
