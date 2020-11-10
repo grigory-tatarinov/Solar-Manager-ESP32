@@ -1,13 +1,13 @@
 ## Solar-Manager-ESP32
  Connection:&nbsp;
-ESP32   - 1602 LCD + I2C Converter &nbsp;
+ESP32   - 1602 LCD + I2C Converter
 * GND		-	 GND &nbsp;
 * VIN  	-	 VCC &nbsp;
 * D21  	-	 SDA &nbsp;
 * D22  	-	 SCL &nbsp;
 
 
-ESP32   - HW-040 Encoder  &nbsp;
+ESP32   - HW-040 Encoder
 * GND		  -	 GND(1pin)  &nbsp;
 * VIN  	  -	 5V(2pin)  &nbsp;
 * D15  	  -	 SW(3pin)  &nbsp;
@@ -16,7 +16,7 @@ ESP32   - HW-040 Encoder  &nbsp;
 * You can change these two pin D4 и D5 and than increase direction will also changed  &nbsp;
 
 
-ESP32   - 1ch 30A Relay  &nbsp;
+ESP32   - 1ch 30A Relay
 * GND		  -	 DC-(1pin)  &nbsp;
 * VIN  	  -	 DC+(2pin)  &nbsp;
 * D13  	  -	 IN(3pin)  &nbsp;
