@@ -1,10 +1,10 @@
-# Solar-Manager-ESP32
-Connection:
-ESP32   - 1602 LCD + I2C Converter
-GND		-	 GND
-VIN  	-	 VCC
-D21  	-	 SDA
-D22  	-	 SCL
+## Solar-Manager-ESP32
+* Connection:&nbsp;
+* ESP32   - 1602 LCD + I2C Converter &nbsp;
+* GND		-	 GND &nbsp;
+* VIN  	-	 VCC
+* D21  	-	 SDA
+* D22  	-	 SCL
 
 
 ESP32   - HW-040 Encoder
