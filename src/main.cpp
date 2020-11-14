@@ -327,10 +327,11 @@ void loop()
   {
     state = SETTING_TIME;
     relay.TurnOff();
+    ClearLine(1, lcd);
     cur.line = 0;
     cur.row = 0;
     SetCursor(lcd, cur);
-    lcd.println("      Abort      ");
+    lcd.println("     Abort!     ");
     delay(1000);
   }
 
@@ -357,7 +358,7 @@ void loop()
       setTime = t;
       // when time is set, write "Time set!"
       SetCursor(lcd, cur);
-      lcd.print("Time set!");
+      lcd.print("    Time set!   ");
       delay(1000);
       ClearLine(1, lcd);
       state = WARMING;
@@ -369,7 +370,7 @@ void loop()
     cur.line = 0;
     cur.row = 0;
     SetCursor(lcd, cur);
-    lcd.print("Time remaining");
+    lcd.print(" Time remaining ");
     cur.line = 1;
     SetCursor(lcd, cur);
     break;
@@ -386,7 +387,7 @@ void loop()
       {
         relay.TurnOff();
         SetCursor(lcd, cur);
-        lcd.print("Done!");
+        lcd.print("      Done!     ");
         delay(1000);
         state = SETTING_TIME;
       }
