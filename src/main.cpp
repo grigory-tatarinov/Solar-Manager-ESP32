@@ -280,7 +280,7 @@ void setup()
   lcd.backlight(); 
   SetCursor(lcd, cur);
 
-  lcd.println("Enter a passcode");
+  lcd.println("  Enter a code  ");
   // wait for a correct password input
   bool isPwdCorrect = false;
   do
@@ -291,30 +291,64 @@ void setup()
     isPwdCorrect = EnterPasscode(lcd, cur, myEnc, BUTTON_PIN, PASSCODE_LENGTH) == PASSCODE;
     if (!isPwdCorrect)
     {
-      SetCursor(lcd, cur);
-      lcd.print("Passcode incorrect");
-      delay(1000);
+      SetCursor(lcd, cur);      
+      lcd.print(" Code incorrect ");
+      delay(1500);
     }
     else
     {
       SetCursor(lcd, cur);
-      lcd.print("Passcode correct");
+      lcd.print("  Code correct  ");
       delay(1000);
     }
   } while (!isPwdCorrect);
-    
-    cur.line = 0;
-    cur.row = 0;
-    SetCursor(lcd, cur);
-    ClearLine(1, lcd);
-    lcd.print("Preheating");
-    relay.TurnOn();
-    delay(60000)
-    relay.TurnOff();
-  
+
   cur.row = 0;
   cur.line = 0;
   SetCursor(lcd, cur);
+
+  lcd.print("    Preheat?    ");
+      cur.line = 1;
+      SetCursor(lcd, cur);
+      int encPrevState = myEnc.getCount();
+      bool startPreheat = false;
+      bool buttonPressed = false;
+      do
+      {
+        buttonPressed = IsButtonPressed(BUTTON_PIN);
+        int encNewState = myEnc.getCount();
+
+        if (encNewState - encPrevState >= 4)
+        {
+          startPreheat = true;
+          encPrevState = encNewState;
+        }
+        if (encNewState - encPrevState <= -4)
+        {
+          startPreheat = false;
+          encPrevState = encNewState;
+        }
+        SetCursor(lcd, cur);
+        if(startPreheat)
+          lcd.print("       Yes      ");
+        else
+          lcd.print("       No       ");
+        delay(5);
+      } while (!buttonPressed);
+    
+      if(startPreheat)
+      {
+        cur.line = 0;
+        cur.row = 0;
+        SetCursor(lcd, cur);
+        lcd.print("   Preheating   ");
+        ClearLine(1, lcd);
+        SetCursor(lcd, cur);
+        relay.TurnOn();
+        delay(60000);
+        relay.TurnOff();
+      }
+
 }
 
 unsigned long long prevMillis = 0;
@@ -336,10 +370,11 @@ void loop()
   {
     state = SETTING_TIME;
     relay.TurnOff();
+    ClearLine(1, lcd);
     cur.line = 0;
     cur.row = 0;
     SetCursor(lcd, cur);
-    lcd.println("      Abort      ");
+    lcd.println("     Abort!     ");
     delay(1000);
   }
 
@@ -366,7 +401,7 @@ void loop()
       setTime = t;
       // when time is set, write "Time set!"
       SetCursor(lcd, cur);
-      lcd.print("Time set!");
+      lcd.print("    Time set!   ");
       delay(1000);
       ClearLine(1, lcd);
       state = WARMING;
@@ -378,7 +413,11 @@ void loop()
     cur.line = 0;
     cur.row = 0;
     SetCursor(lcd, cur);
-    lcd.print("Time remaining");
+
+    cur.line = 0;
+    cur.row = 0;
+    SetCursor(lcd, cur);
+    lcd.print(" Time remaining ");
     cur.line = 1;
     SetCursor(lcd, cur);
     break;
@@ -395,7 +434,7 @@ void loop()
       {
         relay.TurnOff();
         SetCursor(lcd, cur);
-        lcd.print("Done!");
+        lcd.print("      Done!     ");
         delay(1000);
         state = SETTING_TIME;
       }
