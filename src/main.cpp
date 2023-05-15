@@ -413,7 +413,6 @@ void loop()
     cur.line = 0;
     cur.row = 0;
     SetCursor(lcd, cur);
-
     cur.line = 0;
     cur.row = 0;
     SetCursor(lcd, cur);
